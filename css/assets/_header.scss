@@ -1,0 +1,228 @@
+// nth-child nav-link delay
+@mixin child-delay {
+	@for $i from 1 to 10 {
+		&:nth-child(#{$i}n) {
+			transition-delay: #{$i * .1}s;
+		}
+	}
+}
+
+/*Menu Trigger */
+#trigger {
+	display: block;
+	position: fixed;
+	top: 1.4rem;
+	right: 1rem;
+	background-color: $secondary;
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+	cursor: pointer;
+	z-index: 98;
+	transition: all 0.2s ease;
+}
+
+.open {
+	i {
+		display: block;
+		background-color: $white; //black
+		width: 24px; //change length
+		height: 2px; //change thickness
+		margin: auto;
+		border-radius: 2px;
+		&:nth-child(1) {
+			margin-top: 18px;
+		}
+		&:nth-child(2) {
+			margin-top: 4px;
+			opacity: 1;
+		}
+		&:nth-child(3) {
+			margin-top: 4px;
+		}
+	}
+}
+
+.close {
+	transform: rotate(45deg);
+	i {
+		transition: transform .2s ease;
+		&:nth-child(1) {
+			transform: translateY(6px) rotate(180deg);
+		}
+		&:nth-child(2) {
+			opacity: 0;
+		}
+		&:nth-child(3) {
+			transform: translateY(-6px) rotate(90deg);
+		}
+	}
+}
+
+// Header ---------------------------------------------------------------------
+header {
+	@include bg-gradient;
+	.logo-mobile {
+		width: 100%;
+		padding: 1.9rem 0;
+		img {
+			width: 150px;
+		}
+	}
+	#menu {
+		position: fixed;
+		visibility: hidden; //NOTE: Change to hiddem
+		top: 0;
+		left: 0;
+		@include bg-gradient;
+		height: 100%;
+		width: 100%;
+		opacity: 0; //NOTE: Change to 0
+		z-index: 1;
+		transition: all 0.2s ease;
+		.logo {
+			width: 150px;
+			margin: 0 auto;
+			padding: 1.9rem 0;
+		}
+		.nav-link {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 88%;
+			height: 100%;
+			margin: 0 auto;
+			a {
+				color: rgba($white, 0.8);
+				margin: .55rem 0;
+				font-size: 24px;
+				opacity: 0; //NOTE: Change to 0
+				transform: translateY(100px);
+				transition: all 0.2s ease;
+				@include child-delay;
+			}
+		}
+	}
+	.content-right {
+		width: 100%;
+		margin: 0 auto;
+		h1,
+		p {
+			text-align: center;
+		}
+		h1 {
+			color: $secondary;
+			font-size: 40px;
+			font-weight: 800;
+			line-height: 1.2;
+		}
+		p {
+			color: $white;
+			font-size: 24px;
+			font-weight: 200;
+			padding-bottom: 30px;
+		}
+	}
+}
+
+// Fade in After trigger
+header {
+	#menu {
+		&.show {
+			visibility: visible;
+			opacity: 1;
+			a {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+}
+
+// Desktop Screen-------------------------------------------------------
+@media screen and (min-width: 1000px) {
+	//Trigger menu is hidden on desktop
+	#trigger {
+		display: none;
+	}
+
+	body header {
+		background: $bgColor url('../assets/Header-BG.svg');
+		background-repeat: no-repeat;
+		background-position: top;
+		background-size: cover;
+
+		.logo-mobile {
+			display: none;
+		}
+		nav {
+			height: 4rem;
+		}
+		#menu {
+			position: static;
+			display: flex;
+			justify-content: space-between;
+			background: transparent;
+			visibility: visible;
+			width: 88%;
+			margin: 0 auto;
+			opacity: 1;
+			transition: unset;
+			.logo {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 200px;
+				padding: 0;
+			}
+			.nav-link {
+				flex-direction: row;
+				justify-content: flex-end;
+				align-items: center;
+				a {
+					display: block;
+					color: darken($white, 20%);
+					margin: 10px;
+					font-size: 1.2rem;
+					border-bottom: 4px solid transparent;
+					opacity: 1;
+					transform: translateX(0);
+					transition: unset;
+					&:hover {
+						color: $white;
+						border-bottom: 4px solid $secondary;
+						transition: all .2s ease;
+					}
+					&:nth-child(n + 0) {
+						transition-delay: unset;
+					}
+				}
+			}
+		}
+		.content-wrap {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			align-items: center;
+			grid-auto-flow: dense;
+		}
+		.content-left {
+			grid-column: 2;
+		}
+		.content-right {
+			width: 80%;
+			height: 50%;
+			h1,
+			p {
+				text-align: left;
+			}
+			h1 {
+				font-size: 50px;
+				text-align: left;
+			}
+			p {
+				font-size: 28px;
+				line-height: 1.6;
+			}
+		}
+	}
+}

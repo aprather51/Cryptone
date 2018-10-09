@@ -1,0 +1,17 @@
+/* Color */
+
+$primary: #4f1f69;
+$secondary: #ff5f2f;
+
+$accent: #281045;
+$base: #57336a;
+
+$bgColor: #f4f4f4;
+$textColor: #333;
+$paleText: #707070;
+
+$white: #fff;
+
+@mixin bg-gradient($angle: 180deg, $color: $accent, $amount: 20%) {
+	background: linear-gradient($angle, $color, adjust-hue($color, $amount)) fixed;
+}
