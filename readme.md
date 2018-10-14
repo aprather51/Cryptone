@@ -1,8 +1,13 @@
 # Cryptone
 
-Personal and basic single webpage developed and designed  by Arthur Prather.  Experimenting with my workflow,  Design logos, isometric, and pattern with Affinity Designer. Set up page using with AdobeXD. Coding and refactoring page following layout design. 
-
+<b>Develop with </b>
 - HTML
 - CSS/SASS
 - JavaScript
+
+<b>Design with ></b>
+- AdobeXD
+- Affinity Designer (Logo and Icons)
+
+My personal and expermental on simple single webpage. Used Adobe XD software design layout. Then develop page following design plan.
 
